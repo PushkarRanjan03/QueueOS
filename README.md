@@ -26,6 +26,20 @@ python -m streamlit run app.py
 
 Open http://localhost:8501.
 
+## Deploying
+
+SurgiQueue is a Streamlit application, not a Flask or FastAPI WSGI module.
+Configure a Python web service with:
+
+```text
+Build command: pip install -r requirements.txt
+Start command: streamlit run app.py --server.address 0.0.0.0 --server.port $PORT
+```
+
+The repository includes `Procfile` and `render.yaml` with this configuration.
+Do not configure the deployment to import `app`, `application`, or `handler`
+from `app.py`; that detection mode is for WSGI/ASGI frameworks.
+
 ## Navigation
 
 The sidebar contains Overview, Patient Queue, Operating Rooms, Medical Teams,

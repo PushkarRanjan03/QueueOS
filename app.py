@@ -92,7 +92,7 @@ def render_overview() -> None:
     st.markdown("### Upcoming procedures")
     st.dataframe(pd.DataFrame(patients), width="stretch", hide_index=True)
     if st.button("Open OS Scheduling Simulator", type="primary"):
-        st.session_state.nav = "OS Scheduler"
+        st.session_state.pending_nav = "OS Scheduler"
         st.rerun()
 
 
@@ -225,6 +225,8 @@ All records, procedures, resources, and measurements are synthetic. This prototy
 
 def main() -> None:
     style_page()
+    if "pending_nav" in st.session_state:
+        st.session_state.nav = st.session_state.pop("pending_nav")
     if "nav" not in st.session_state:
         st.session_state.nav = "Overview"
     if "patients" not in st.session_state:
